@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learning/app/my_app.dart';
 
 void main() {
-  runApp(MaterialApp(
-    title: "flutter learn",
-    home: Container(
-      color: Colors.red,
-    ),
-  ));
+  runApp(const MyApp());
 }
