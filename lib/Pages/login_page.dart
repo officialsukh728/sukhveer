@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
             decoration: const InputDecoration(
               hintText: "Enter username",
               labelText: "Username",
-            ),
+             ),
           ),
           TextFormField(
             decoration: const InputDecoration(
