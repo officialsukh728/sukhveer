@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeData(
+        fontFamily: GoogleFonts.lato().fontFamily,
         primarySwatch: Colors.deepPurple,
-        primaryTextTheme: GoogleFonts.latoTextTheme(),
+
       ),
       routes: {
         "/": (context) => const LoginPage(),
