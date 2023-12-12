@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:learning2/catelog.dart';
+import 'package:learning2/widgets/drawer.dart';
+import 'package:learning2/widgets/item_widgets.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     const int day = 30;
-    const String name = "Codepur";
+    String name = "sukhveer";
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
-
-        title: const Center(child: Text("Catalog App")),
+        centerTitle: true,
+        title: const Text("Catalog App"),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge,
       ),
-      body: Center(
-        child: Container(
-          child: const Text("Walcome $day day  of flullter by $name "),
-        ),
+      body: ListView.builder(
+        itemCount: CatalogModel.Items.length,
+        itemBuilder: (context, index) {
+          return ItemWidget(
+            item: CatalogModel.Items[index],
+          );
+        },
       ),
-      drawer: const Drawer(),
     );
   }
 }
