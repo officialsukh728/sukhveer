@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 import 'package:learning2/catelog.dart';
 import 'package:learning2/widgets/drawer.dart';
-import 'package:learning2/widgets/item_widgets.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  static String iniRoute = "/";
+
+  static String homeRoute = "/home";
+
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -12,9 +17,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    Future.delayed(Duration.zero, () => loadData());
+    super.initState();
+  }
+
+  void loadData() async {
+    final catalogjson =
+        await rootBundle.loadString("assets/files/catelog.json");
+    final decodedata = jsonDecode(catalogjson);
+    var productsData = decodedata["products"];
+    CatalogModel.item = List.from(productsData)
+        .map<Item>((item) => Item.formMap(item))
+        .toList();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const int day = 30;
-    String name = "sukhveer";
     return Scaffold(
       drawer: MyDrawer(),
       appBar: AppBar(
@@ -22,13 +42,42 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Catalog App"),
         titleTextStyle: Theme.of(context).textTheme.titleLarge,
       ),
-      body: ListView.builder(
-        itemCount: CatalogModel.Items.length,
-        itemBuilder: (context, index) {
-          return ItemWidget(
-            item: CatalogModel.Items[index],
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: CatalogModel.item.isNotEmpty
+            ? GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.item[index];
+                  return Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: GridTile(
+                        header: Container(
+                          child: Text(
+                            item.name ?? "",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        child: Image.network(item.image ?? ""),
+                        footer: Text(item.price.toString() ?? ""),
+                      ));
+                },
+                itemCount: CatalogModel.item.length,
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
   }
