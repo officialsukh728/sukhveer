@@ -10,97 +10,26 @@ CatelogModel catelogModelFromJson(String str) =>
 String catelogModelToJson(CatelogModel data) => json.encode(data.toJson());
 
 class CatelogModel {
-  final List<Product>? products;
-
-  CatelogModel({
-    this.products,
-  });
-
-  CatelogModel copyWith({
-    List<Product>? products,
-  }) =>
-      CatelogModel(
-        products: products ?? this.products,
-      );
+  final List<Item>? items;
+  static List<Item> item = <Item>[];
+//Ger by id
+  Item getById(int id) =>
+      item.firstWhere((element) => element.id == id, orElse: () => Item());
+ // Get Item by position
+  Item  getByPosition(int pos)=>item[pos];
+  CatelogModel({this.items});
 
   factory CatelogModel.fromJson(Map<String, dynamic> json) => CatelogModel(
-        products: json["products"] == null
+        items: json["products"] == null
             ? []
-            : List<Product>.from(
-                json["products"]!.map((x) => Product.fromJson(x))),
+            : List<Item>.from(json["products"]!.map((x) => Item.formMap(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "products": products == null
+        "products": items == null
             ? []
-            : List<dynamic>.from(products!.map((x) => x.toJson())),
+            : List<dynamic>.from(items!.map((x) => x.toMap())),
       };
-}
-
-class Product {
-  final int? id;
-  final String? name;
-  final String? desc;
-  final int? price;
-  final String? color;
-  final String? image;
-
-  Product({
-    this.id,
-    this.name,
-    this.desc,
-    this.price,
-    this.color,
-    this.image,
-  });
-
-  Product copyWith({
-    int? id,
-    String? name,
-    String? desc,
-    int? price,
-    String? color,
-    String? image,
-  }) =>
-      Product(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        desc: desc ?? this.desc,
-        price: price ?? this.price,
-        color: color ?? this.color,
-        image: image ?? this.image,
-      );
-
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json["id"],
-        name: json["name"],
-        desc: json["desc"],
-        price: json["price"],
-        color: json["color"],
-        image: json["image"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "desc": desc,
-        "price": price,
-        "color": color,
-        "image": image,
-      };
-}
-
-class CatalogModel {
-  static List<Item> item = [
-    Item(
-      id: 1,
-      name: " iphone 12 pro ",
-      desc: "Apple iphone 12th  genertion",
-      price: 2000,
-      color: "#33505a",
-      image: "assets/images/iphone113.jpg",
-    ),
-  ];
 }
 
 class Item {
