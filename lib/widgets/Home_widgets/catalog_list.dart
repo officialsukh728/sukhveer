@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learning2/Pages/home_detall_puge.dart';
 
-import 'package:learning2/catelog.dart';
+import 'package:learning2/models/catelog.dart';
 import 'package:learning2/widgets/Home_widgets/catalog_item.dart';
 
 class CatalogList extends StatelessWidget {
@@ -14,9 +14,9 @@ class CatalogList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: CatelogModel.item.length,
+      itemCount: CatelogModel().item.length,
       itemBuilder: (context, index) {
-        final catalog = CatelogModel.item[index];
+        final catalog = CatelogModel().item[index];
         return InkWell(
           onTap: () => Navigator.push(
             context,

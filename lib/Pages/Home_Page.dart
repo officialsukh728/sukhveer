@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learning2/Pages/cart_puge.dart';
 import 'dart:convert';
-import 'package:learning2/catelog.dart';
+import 'package:learning2/models/catelog.dart';
 import 'package:learning2/widgets/Home_widgets/catalog_header.dart';
 import 'package:learning2/widgets/Home_widgets/catalog_list.dart';
 import 'package:learning2/widgets/Theme.dart';
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         await rootBundle.loadString("assets/files/catelog.json");
     final decodedata = jsonDecode(catalogjson);
     var productsData = decodedata["products"];
-    CatelogModel.item = List.from(productsData)
+    CatelogModel().item = List.from(productsData)
         .map<Item>((item) => Item.formMap(item))
         .toList();
     setState(() {});
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CatalogHeader(),
-              if (CatelogModel.item.isNotEmpty == true)
+              if (CatelogModel().item.isNotEmpty == true)
                 const CatalogList().py(16).expand()
               else
                 Center(child: const CircularProgressIndicator().py16()),

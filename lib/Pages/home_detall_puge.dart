@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:learning2/catelog.dart';
-import 'package:learning2/widgets/Theme.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:learning2/models/catelog.dart';
+  import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailPage extends StatelessWidget {
   static const String homeDetailPage = "/homeDetailPage";
@@ -61,34 +60,37 @@ class HomeDetailPage extends StatelessWidget {
                 child: Container(
                   color: context.theme.cardColor,
                   width: context.screenWidth,
-                  child: Column(
-                    children: [
-                      catalog.name
-                          .toString()
-                          .text
-                          .bold
-                          .xl4
-                          .color(context.theme.dividerColor)
-                          .make(),
-                      catalog.desc
-                          .toString()
-                          .text
-                          .textStyle(context.captionStyle)
-                          .xl
-                          .make(),
-                      10.heightBox.py(3),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        catalog.name
+                            .toString()
+                            .text
+                            .bold
+                            .xl4
+                            .color(context.theme.dividerColor)
+                            .make(),
+                        catalog.desc
+                            .toString()
+                            .text
+                            .textStyle(context.captionStyle)
+                            .xl
+                            .make(),
+                        10.heightBox.py(3),
 
      ''''   128 GB ROM15,49 cm (6.1 inch) Super Retina XDR Display
     12MP + 12MP + 12MP | 12MP Front Camera 
     A14 Bionic Chip with Next Generation Neural Engine Processor
     Ceramic Shield | Industry-leading IP68 Water Resistance
     LiDAR Scanner for Improved AR Experiences,Night Mode Portraits '''.text
-                          .textStyle(context.captionStyle)
-                          .make(),
-                    ],
-                  ).py64(),
+                            .textStyle(context.captionStyle)
+                            .make(),
+                      ],
+                    ).py64(),
+                  ),
                 ),
               ),
+
             ),
           ],
         ),

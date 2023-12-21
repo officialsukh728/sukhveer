@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:learning2/catelog.dart';
+import 'package:learning2/models/catelog.dart';
 
 class ItemWidget extends StatelessWidget {
   final Item item;

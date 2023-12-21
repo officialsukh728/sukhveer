@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+
 CatelogModel catelogModelFromJson(String str) =>
     CatelogModel.fromJson(json.decode(str));
 
@@ -11,25 +12,28 @@ String catelogModelToJson(CatelogModel data) => json.encode(data.toJson());
 
 class CatelogModel {
   final List<Item>? items;
-  static List<Item> item = <Item>[];
+  List<Item> item = <Item>[];
+
 //Ger by id
   Item getById(int id) =>
       item.firstWhere((element) => element.id == id, orElse: () => Item());
- // Get Item by position
-  Item  getByPosition(int pos)=>item[pos];
+
+  // Get Item by position
+  Item getByPosition(int pos) => item[pos];
+
   CatelogModel({this.items});
 
-  factory CatelogModel.fromJson(Map<String, dynamic> json) => CatelogModel(
-        items: json["products"] == null
-            ? []
-            : List<Item>.from(json["products"]!.map((x) => Item.formMap(x))),
-      );
+factory CatelogModel.fromJson(Map<String, dynamic> json) => CatelogModel(
+      items: json["products"] == null
+          ? []
+          : List<Item>.from(json["products"]!.map((x) => Item.formMap(x))),
+    );
 
-  Map<String, dynamic> toJson() => {
-        "products": items == null
-            ? []
-            : List<dynamic>.from(items!.map((x) => x.toMap())),
-      };
+Map<String, dynamic> toJson() => {
+      "products": items == null
+          ? []
+          : List<dynamic>.from(items!.map((x) => x.toMap())),
+    };
 }
 
 class Item {
