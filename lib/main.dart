@@ -7,7 +7,7 @@ import 'package:learning2/widgets/Theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 void main() {
-  runApp(VxState(store: MyStore(), child:MyApp() ));
+  runApp(VxState(store: MyStore(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       darkTheme: MyTheme.darkTheme(context),
       initialRoute: HomePage.iniRoute,
       routes: {
-        HomePage.iniRoute: (context) => HomePage(),
+        HomePage.iniRoute: (context) => LoginPage(),
         HomePage.homeRoute: (context) => HomePage(),
         LoginPage.loginRoute: (context) => LoginPage(),
         CartPage.cartRoute: (context) => CartPage(),

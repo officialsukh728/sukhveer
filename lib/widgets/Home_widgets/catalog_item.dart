@@ -12,42 +12,48 @@ class CatalogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final children = [
+      Hero(
+          tag: Key(catalog.id.toString()),
+          child: CatalogImage(Image: catalog.image ?? "")),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            catalog.name
+                .toString()
+                .text
+                .bold
+                .lg
+                .color(context.theme.dividerColor)
+                .make(),
+            catalog.desc.toString().text.textStyle(context.captionStyle).make(),
+            10.heightBox,
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
+              buttonPadding: EdgeInsets.zero,
+              children: [
+                " \$${catalog.price}".toString().text.bold.xl.make(),
+                AddToCart(catalog: catalog)
+              ],
+            ).pOnly(right: 8),
+          ],
+        ).p(context.isMobile ? 0 : 16),
+       )
+    ];
     return VxBox(
-        child: Row(
-      children: [
-        Hero(
-            tag: Key(catalog.id.toString()),
-            child: CatalogImage(Image: catalog.image ?? "")),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              catalog.name
-                  .toString()
-                  .text
-                  .bold
-                  .lg
-                  .color(context.theme.dividerColor)
-                  .make(),
-              catalog.desc
-                  .toString()
-                  .text
-                  .textStyle(context.captionStyle)
-                  .make(),
-              10.heightBox,
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceBetween,
-                buttonPadding: EdgeInsets.zero,
-                children: [
-                  " \$${catalog.price}".toString().text.bold.xl.make(),
-                  AddToCart(catalog: catalog)
-                ],
-              ).pOnly(right: 8),
-            ],
-          ),
-        )
-      ],
-    )).color(context.cardColor).rounded.square(150).make().py16();
+            child: context.isMobile
+                ? Row(
+                    children: children,
+                  )
+                : Column(
+                    children: children,
+                  ))
+        .color(context.cardColor)
+        .rounded
+        .square(150)
+        .make()
+        .py16();
   }
 }

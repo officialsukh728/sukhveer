@@ -12,41 +12,40 @@ class CatalogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !context.isMobile ? GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2),
-      shrinkWrap: true,
-      itemCount: CatelogModel.item.length,
-      itemBuilder: (context, index) {
-        final catalog = CatelogModel.item[index];
-        return InkWell(
-          onTap: () =>
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeDetailPage(catalog: catalog),
+    return !context.isMobile
+        ? GridView.builder  (
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, crossAxisSpacing: 20),
+            shrinkWrap: true,
+            itemCount: CatelogModel.item.length,
+            itemBuilder: (context, index) {
+              final catalog = CatelogModel.item[index];
+              return InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeDetailPage(catalog: catalog),
+                  ),
                 ),
-              ),
-          child: CatalogItem(catalog: catalog),
-        );
-      },
-    ):ListView.builder(
-      shrinkWrap: true,
-      itemCount: CatelogModel.item.length,
-      itemBuilder: (context, index) {
-        final catalog = CatelogModel.item[index];
-        return InkWell(
-          onTap: () =>
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeDetailPage(catalog: catalog),
+                child: CatalogItem(catalog: catalog),
+              );
+            },
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: CatelogModel.item.length,
+            itemBuilder: (context, index) {
+              final catalog = CatelogModel.item[index];
+              return InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeDetailPage(catalog: catalog),
+                  ),
                 ),
-              ),
-          child: CatalogItem(catalog: catalog),
-        );
-      },
-    )
-    ;
+                child: CatalogItem(catalog: catalog),
+              );
+            },
+          );
   }
 }

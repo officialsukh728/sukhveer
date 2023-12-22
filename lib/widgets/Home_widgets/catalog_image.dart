@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:learning2/widgets/Theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CatalogImage extends StatelessWidget {
@@ -17,6 +16,6 @@ class CatalogImage extends StatelessWidget {
         .color(context.canvasColor)
         .make()
         .p16()
-        .w40(context);
+        .wPCT(context: context, widthPCT:context.isMobile?40:20 );
   }
 }
