@@ -1,27 +1,48 @@
+import 'package:learning2/core/store.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 import 'catelog.dart';
+
 class CartModel {
-  // catelog  fie
-  CatelogModel _catelogModel =CatelogModel();
-  final List<int> _itemIds = [];
+  // catelog  fie1
+  CatelogModel _catelogModel = CatelogModel();
+
+  List<int> _itemIds = [];
 
   CatelogModel get catalog => _catelogModel;
 
-  set catalog1(CatelogModel newCatalog) {
-    assert(newCatalog!=null);
+  set catalog(CatelogModel newCatalog) {
     _catelogModel = newCatalog;
   }
 
-  List<Item> get items => _itemIds.map((id) => _catelogModel.getById(id)).toList();
+  List<Item> get items =>
+      _itemIds.map((id) => _catelogModel.getById(id)).toList();
 
-  // Get  total price
-  num get totalPrice =>
-      items.fold(0, (total, current) => total + (current.price??0) );
-//  Add Item
- void add(Item item){
-   _itemIds.add(item.id??0);
- }
-// Remove item
-void remove(Item item){
-   _itemIds.remove(item.id);
+  /// Get  total price
+  num get totalPrice => items.fold(
+        0,
+        (total, current) => total + (current.price ?? 0),
+      );
 }
+
+class AddMutation extends VxMutation<MyStore> {
+  final Item item;
+
+  AddMutation({required this.item});
+
+  @override
+  perform() {
+    store!.cart._itemIds.add(item.id ?? 0);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore> {
+  final Item item;
+
+  RemoveMutation({required this.item});
+
+  @override
+  perform() {
+    store!.cart._itemIds.remove(item.id ?? 0);
+  }
 }

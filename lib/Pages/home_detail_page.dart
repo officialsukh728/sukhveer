@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:learning2/models/catelog.dart';
-  import 'package:velocity_x/velocity_x.dart';
+import 'package:learning2/widgets/Home_widgets/add_to_cart.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailPage extends StatelessWidget {
   static const String homeDetailPage = "/homeDetailPage";
@@ -29,16 +30,8 @@ class HomeDetailPage extends StatelessWidget {
                 .xl4
                 .color(Vx.red800)
                 .make(),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStatePropertyAll(context.theme.bottomAppBarColor),
-                shape: MaterialStatePropertyAll(
-                  StadiumBorder(),
-                ),
-              ),
-              onPressed: () {},
-              child: "Add to cart".text.make(),
+            AddToCart(
+              catalog: catalog,
             ).wh(120, 50)
           ],
         ).p32(),
@@ -77,12 +70,12 @@ class HomeDetailPage extends StatelessWidget {
                             .xl
                             .make(),
                         10.heightBox.py(3),
-
-     ''''   128 GB ROM15,49 cm (6.1 inch) Super Retina XDR Display
+                        ''''   128 GB ROM15,49 cm (6.1 inch) Super Retina XDR Display
     12MP + 12MP + 12MP | 12MP Front Camera 
     A14 Bionic Chip with Next Generation Neural Engine Processor
     Ceramic Shield | Industry-leading IP68 Water Resistance
-    LiDAR Scanner for Improved AR Experiences,Night Mode Portraits '''.text
+    LiDAR Scanner for Improved AR Experiences,Night Mode Portraits '''
+                            .text
                             .textStyle(context.captionStyle)
                             .make(),
                       ],
@@ -90,7 +83,6 @@ class HomeDetailPage extends StatelessWidget {
                   ),
                 ),
               ),
-
             ),
           ],
         ),

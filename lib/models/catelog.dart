@@ -12,7 +12,7 @@ String catelogModelToJson(CatelogModel data) => json.encode(data.toJson());
 
 class CatelogModel {
   final List<Item>? items;
-  List<Item> item = <Item>[];
+ static List<Item> item = <Item>[];
 
 //Ger by id
   Item getById(int id) =>
